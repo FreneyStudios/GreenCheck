@@ -1,0 +1,258 @@
+/*++
+
+Copyright (c) 2025  Frêney Studios
+
+Module Name:
+
+	style.css
+
+Abstract:
+
+	Main style file
+
+Author:
+
+	Marco Panseri (Marx) 28-03-2025
+
+Revision History:
+
+--*/
+
+/* static/style.css */
+body {
+    background-color: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden; /* Prevent overflow when input expands */
+    /* background-image: url('Monte_bianco.JPG'); */
+    /* background-size: cover; /* Ensures the image covers the entire element */
+    /* background-position: center; /* Centers the image within the element */
+    /* background-repeat: no-repeat; /* Prevents the image from repeating */
+    /* backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); */
+}
+
+.corner-text {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    text-align: right;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.corner-text a {
+    color: inherit; /* Inherits the color from its parent element */
+    text-decoration: none; /* Removes underline */
+}
+
+.corner-text a:hover {
+    text-decoration: underline; /* Adds underline on hover */
+}
+
+
+.glow-text {
+    font-size: 10rem; /* Initial "GreenCheck" text size */
+    text-shadow: 0 0 20px white, 0 0 40px rgb(55, 255, 0);
+    padding: 20px 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    transition: all 0.4s ease-in-out; /* Transition for shrink and move */
+}
+
+.glow-text.shrink {
+    font-size: 3rem; /* Smaller size when typing */
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(10px, 10px); /* Move to top-left */
+}
+
+/* Lock the "GreenCheck" text to the top-left corner */
+.glow-text.locked {
+    font-size: 3rem;  /* Maintain smaller size */
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    transform: translate(0, 0);  /* Fix position at top-left */
+    transition: none;  /* Remove any transition when locked */
+}
+
+.glow-entry {
+    font-size: 2rem; /* Smaller font size */
+    padding: 10px 30px; /* Widened padding for a larger input box */
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    text-shadow: 0 0 20px white, 0 0 40px rgb(55, 255, 0);
+    box-shadow: 0 0 15px rgb(55, 255, 0);
+    border: 2px solid white;
+    transition: transform 0.3s ease-in-out;
+    font-weight: bold;
+    width: 500px; /* Increased width of the input box */
+    text-align: center;
+    margin-top: 10px; /* Move it below the "GreenCheck" text */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease-in-out;
+}
+
+.glow-entry input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 1.8rem; /* Smaller text inside the input */
+    text-align: center;
+    outline: none;
+    text-shadow: 0 0 20px white, 0 0 40px rgb(55, 255, 0);
+}
+
+.glow-entry input::placeholder {
+    color: white;
+    text-shadow: 0 0 20px white, 0 0 40px rgb(55, 255, 0);
+}
+
+.send-btn {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    outline: none;
+    padding: 0 15px;
+    transition: transform 0.2s ease;
+}
+
+.send-btn i {
+    font-size: 2rem;
+}
+
+.send-btn:hover {
+    transform: scale(1.2);
+}
+
+/* Style for the message box with balloon tail */
+.message-box {
+    position: absolute;
+    bottom: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgb(55, 255, 0);
+    font-size: 2rem;
+    max-width: 80%;
+    text-align: center;
+    margin-top: 20px;
+    display: none; /* Hidden by default */
+    animation: slide-down 0.5s ease-out; /* Sliding animation */
+}
+
+/* Balloon tail */
+.message-box::after {
+    content: '';
+    position: absolute;
+    top: -20px; /* Position the tail above the box */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid rgba(0, 0, 0, 0.8);  /* Same color as the message box */
+}
+
+/* Animation for sliding down */
+@keyframes slide-down {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#footer {
+    background-color: #333;
+    color: #fff;
+    padding: 2.5px;
+    text-align: center;
+    margin-top: auto;  /* Push the footer to the bottom */
+    width: 100%;
+    border-radius: 2.5%;
+}
+
+.footer-content a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
+}
+
+.footer-links {
+    text-align: left;
+    margin-top: 10px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+#input-container {
+    position: absolute;
+    bottom: 325px; /* Posizionato vicino a "GreenCheck" all'inizio */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    transition: all 0.4s ease-in-out; /* Transizione fluida */
+}
+
+.made-in-italy {
+    font-style: italic;
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.confidential-watermark {
+    position: fixed; /* Position relative to the browser window */
+    bottom: 70px;    /* 15 pixels from the bottom edge (adjust as needed for "not full bottom") */
+    left: 15px;      /* 15 pixels from the left edge (adjust as needed) */
+    color: red;      /* Set the text color to red */
+    text-shadow: 0 0 20px white, 0 0 40px rgb(255, 0, 0);
+    opacity: 0.5;    /* Make it semi-transparent (adjust opacity as needed) */
+    font-size: 10px; /* Adjust font size as needed for readability */
+    font-family: monospace; /* Use a monospace font to help preserve spacing if needed */
+    z-index: 1000;   /* Ensure it appears on top of other content */
+    pointer-events: none; /* Prevent the watermark from blocking mouse clicks on content behind it */
+    white-space: pre-wrap; /* Preserve line breaks and spaces from the HTML content */
+    /* Optional: width property if you want to limit its width and allow wrapping */
+    /* width: 300px; */
+}
