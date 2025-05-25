@@ -1,0 +1,88 @@
+#!/usr/bin/env python3
+#/*--
+#
+# Copyright (c) 2025  Frêney Studios
+# Copyright (c) 2025  XCMG (XCube Media Group)
+#
+# Module Name:
+#
+#	 cmdproc.py
+#
+# Abstract:
+#
+#	 Main file for GreenCheck Command Processor (Open-source) 
+# 
+# - Made in Italy
+#
+# Author:
+#
+#	 Marco Panseri (Marx) 17-05-2025
+#
+# Revision History:
+#
+#--*/
+
+#
+# [SECTIONS]
+# [SECTION] - IMPORTS
+# [SECTION] - FUNCTIONS
+#
+#
+
+# [SECTION] - IMPORTS
+from transformers import pipeline
+import geck_aim
+import geck_aim_storage 
+
+
+# [SECTION] - FUNCTIONS
+def process_string(string: str) -> str:
+  if string.lower().startswith("@help"):
+    response = "Avaiable commands: "
+  elif string.lower().startswith("@iseco")      or \
+       string.lower().startswith("@isecologic") or \
+       string.lower().startswith("@ecologic")      :
+    geck_aim.geck_aim_init()
+    response = geck_aim.model_catclas(
+        string.lower(),
+        geck_aim_storage.iseco_labels,
+        hypothesis_template=geck_aim_storage.hypothesis_template_iseco,
+        multi_label=True
+    )
+    response = str(response['labels'][0])
+  elif string.lower().startswith("@iseco++")      or \
+       string.lower().startswith("@isecologic++") or \
+       string.lower().startswith("@ecologic++")      :
+    geck_aim.geck_aim_init()
+    response = geck_aim.model_catclas(
+        string.lower(),
+        geck_aim_storage.isecoxx_labels,
+        hypothesis_template=geck_aim_storage.hypothesis_template_iseco,
+        multi_label=True
+    )
+    response = str(response['labels'][0])
+  elif string.lower().startswith("@isgoodforus")    or \
+       string.lower().startswith("@isgood")         or \
+       string.lower().startswith("@isgood4us")      or \
+       string.lower().startswith("@good4us")           :
+    geck_aim.geck_aim_init()
+    response = geck_aim.model_catclas(
+        string.lower(),
+        geck_aim_storage.yn_labels,
+        hypothesis_template=geck_aim_storage.hypothesis_template_isgoodforus,
+        multi_label=True
+    )
+    response = str(response['labels'][0])
+  elif string.lower().startswith("@isgoodforfuture")    or \
+       string.lower().startswith("@isgood4future")         or \
+       string.lower().startswith("@isgoodfu")      or \
+       string.lower().startswith("@good4future")           :
+    geck_aim.geck_aim_init()
+    response = geck_aim.model_catclas(
+        string.lower(),
+        geck_aim_storage.yn_labels,
+        hypothesis_template=geck_aim_storage.hypothesis_template_isgoodforfu,
+        multi_label=True
+    )
+    response = str(response['labels'][0])
+  return response

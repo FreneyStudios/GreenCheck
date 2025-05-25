@@ -1,0 +1,216 @@
+<!--
+#
+# Copyright (c) 2025  Frêney Studios
+#
+# Module Name:
+#
+#    index.html
+#
+# Abstract:
+#
+#    GreenCheck main GUI
+#
+# Author:
+#
+#    Marco Panseri (Marx) 28-03-2025
+#
+# Revision History:
+#
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frêney Studios - GreenCheck </title>
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Include FontAwesome for arrow icon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Glow text for GreenCheck -->
+    <div class="glow-text" id="glow-text">GreenCheck</div>
+    
+    <div id="input-container">
+        <form id="input-form" method="POST" action="/submit">
+            <div class="glow-entry">
+                <input type="text" name="user_input" id="user_input" placeholder="Type here..." required />
+                <button type="submit" class="send-btn" id="sendButton">
+                    <i class="fa fa-arrow-right"></i> </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var inputElement = document.getElementById('user_input');
+          if (inputElement) {
+            inputElement.focus();
+            inputElement.selectionStart = inputElement.selectionEnd = inputElement.value.length;
+          }
+        });
+    </script>
+
+    <div class="confidential-watermark">
+        Frêney Studios [ CONFIDENTIAL ]
+        =======================================================
+        This build is strictly reserved for the following authorized entities:
+        1 - Frêney Studios
+        2 - Frêney S.r.l
+        3 - MYSTIC
+        4 - The XCube Media Group
+        5 - XCube Studios
+        6 - Partners authorized by 1, 2, 3, and 4
+        
+        Unreported leaks will result in IMMEDIATE ACTION.
+        This software is strictly NON-DISTRIBUTABLE.
+        Leaks caused by staff may lead to TERMINATION.
+        GreenCheck and its theory are NOT OPEN SOURCE!
+        
+        Your compliance ensures the integrity and security of this project.
+    </div>
+
+    <!-- Full confidential-caption -->
+    <!-- Frêney Studios [ CONFIDENTIAL ]
+        =======================================================
+        This build is strictly reserved for the following authorized entities:
+        1 - Frêney Studios
+        2 - Frêney S.r.l
+        3 - MYSTIC
+        4 - The XCube Media Group
+        5 - XCube Studios
+        6 - Partners authorized by 1, 2, 3, and 4
+        
+        The hierarchy is as follows:
+        - 1 represents the owner, while the others are authorized partners.
+        - The lower the number, the greater the authority and testing access in the project.
+        
+        This software is not intended for regular users. If you encounter a leak, please report it IMMEDIATELY to:
+            |-> info@studios.freney.com
+        
+        Unreported leaks will result in IMMEDIATE ACTION.
+        This software is strictly NON-DISTRIBUTABLE.
+        Leaks caused by staff may lead to TERMINATION.
+        
+        Your compliance ensures the integrity and security of this project.
+    -->
+    
+    <!-- Corner text for branding -->
+    <div class="corner-text">
+        <a href="https://studios.freney.com" target="_blank">Frêney Studios<br></a>
+        <a href="https://freney.com" target="_blank">Frêney S.r.l<br></a>
+        <a href="https://youtube.com/@XCubeMediaGroup" target="_blank">XCube Media Group</a>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Frêney Studios. All Rights Reserved.</p>
+            <p>Stay tuned on 
+                <a href="https://studios.freney.com" target="_blank">Our website</a> | 
+                <a href="https://youtube.com/@FreneyStudios" target="_blank">YouTube</a> | 
+                <a href="https://whatsapp.com/channel/0029VaSBSWGF1YlTDHVcQl22" target="_blank">WhatsApp</a>
+            </p>
+            <h4>Fully Open-Source</h4>
+            <div class="footer-links">
+                <!--
+                <p>Other: 
+                    <a href="about.html" target="_blank">About</a> |
+                    <a href="launcher" target="_blank">Launcher</a> |
+                    <a href="f2030.html" target="_blank">F!ck 2030</a>
+                </p>
+                -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- User message container -->
+    <div id="message-box" class="message-box" style="display: none;">
+        <p id="user-message"></p>
+    </div>
+
+    <!-- Input message container -->
+    <!-- <div id="input-message-box" class="input-message-box" style="display: none;">
+        <p id="input-message"></p>
+    </div> --!>
+
+    <!-- JavaScript to handle the effect -->
+    <script>
+       document.addEventListener("DOMContentLoaded", function () {
+            const glowText = document.getElementById('glow-text'); // Testo "GreenCheck"
+            const userInput = document.getElementById('user_input'); // Campo input utente
+            const sendButton = document.getElementById('sendButton'); // Pulsante di invio
+            const form = document.getElementById('input-form'); // Form di input
+            const messageBox = document.getElementById('message-box'); // Box del messaggio inviato
+            const userMessageElement = document.getElementById('user-message'); // Testo del messaggio utente
+            let isSubmitted = false;
+
+            userInput.addEventListener('input', function () {
+                const glowEntry = document.querySelector('.glow-entry');
+
+                if (userInput.value.length > 0 && !isSubmitted) {
+                    glowText.classList.add('shrink');
+                    glowEntry.style.width = "500px";
+                    glowEntry.style.marginTop = "220px";
+                } else if (userInput.value.length === 0 && !isSubmitted) {
+                    glowText.classList.remove('shrink');
+                    glowEntry.style.width = "300px";
+                    glowEntry.style.marginTop = "350px";
+                }
+            });
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                // if (isSubmitted) return;
+
+                const inputText = userInput.value.trim();
+                if (inputText === "") {
+                    alert("Please, fill out this field");
+                    return;
+                }
+
+                // Mostra il messaggio inviato
+                userMessageElement.textContent = inputText;
+                messageBox.innerHTML = `<p>${inputText}</p>`;
+                messageBox.style.display = "block";
+
+                // Blocca il campo input sopra il footer
+                const footer = document.querySelector('.footer');
+                const inputBox = document.querySelector('.glow-entry');
+
+                if (footer) {
+                    const footerTop = footer.getBoundingClientRect().top + window.scrollY;
+                    const inputHeight = inputBox.offsetHeight;
+                    inputBox.style.position = "absolute";
+                    inputBox.style.top = `${footerTop - inputHeight - 10}px`;
+                }
+
+                // Disabilita il campo input dopo l'invio
+                // userInput.disabled = true;
+                // userInput.style.opacity = "0.6";
+                isSubmitted = true;
+
+                // Invia l'input al server tramite AJAX
+                fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'user_input=' + encodeURIComponent(inputText)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Response: ', data);
+
+                    // Inserisce la risposta nel balloon
+                    messageBox.innerHTML = `<p>${data.response}</p>`;
+                    messageBox.style.display = "block";
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
+</body>
+</html>
