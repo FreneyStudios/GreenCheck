@@ -43,7 +43,7 @@ except Exception as e:
   print("Error importing modules: ", e) # More specific error message
 
 # [SECTION] - VARIABLES
-version     = "v.0.0.4"
+version     = "v.0.0.5"
 __version__ = version
 assert version != None
 

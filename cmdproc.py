@@ -38,7 +38,27 @@ import geck_aim_storage
 # [SECTION] - FUNCTIONS
 def process_string(string: str) -> str:
   if string.lower().startswith("@help"):
-    response = "Avaiable commands: "
+    response = """Avaiable commands: 
+              @help                       - shows this output
+              @iseco       "LoremIpsum"   - return if an object is ecologic
+              @iseco++     "LoremIpsum"   - return if an object is ecologic, not only with "Yes" or "No" 
+              @good4us     "LoremIpsum"   - return if an object is good for us (humans)
+              @good4future "LoremIpsum"   - return if an object is good for the future
+              @advice      "LoremIpsum"   - should we advice this? Yes/No
+              
+            IMPORTANT NOTICE: Check are done with zero-shot classification, so they aren't 
+                              100% correct!
+            
+            SENTENCES ADVICES: We Advice to add "Increment"/"Decrement" to sentences that use the object
+                               complement
+
+            Frêney Studios - XCMG 
+            GreenCheck
+            Copyright (c) 2025  Frêney Studios Holdings
+            Copyright (c) 2025  XCMG (XCube Media Group)
+
+            Made in Italy      
+  """
   elif string.lower().startswith("@iseco")      or \
        string.lower().startswith("@isecologic") or \
        string.lower().startswith("@ecologic")      :
@@ -82,6 +102,18 @@ def process_string(string: str) -> str:
         string.lower(),
         geck_aim_storage.yn_labels,
         hypothesis_template=geck_aim_storage.hypothesis_template_isgoodforfu,
+        multi_label=True
+    )
+    response = str(response['labels'][0])
+  elif string.lower().startswith("@advice")    or \
+       string.lower().startswith("@advice4us")         or \
+       string.lower().startswith("@goodadvice")      or \
+       string.lower().startswith("@adv")           :
+    geck_aim.geck_aim_init()
+    response = geck_aim.model_catclas(
+        string.lower(),
+        geck_aim_storage.yn_labels,
+        hypothesis_template=geck_aim_storage.hypothesis_template_advice,
         multi_label=True
     )
     response = str(response['labels'][0])
