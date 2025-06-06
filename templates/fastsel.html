@@ -1,0 +1,57 @@
+<!--
+#
+# Copyright (c) 2025  Frêney Studios
+#
+# Module Name:
+#
+#    fassel.html
+#
+# Abstract:
+#
+#    GreenCheck Fast Command Selector
+#    Functions
+#
+# Author:
+#
+#    Marco Panseri (Marx) 30-05-2025
+#
+# Revision History:
+#
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Carte 3D</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="card" onclick="sendCardAction('card1')">
+            <div class="card-inner">
+                <div class="card-front">CARTA 1</div>
+                <div class="card-back">AZIONE!</div>
+            </div>
+        </div>
+        <div class="card" onclick="sendCardAction('card2')">
+            <div class="card-inner">
+                <div class="card-front">CARTA 2</div>
+                <div class="card-back">AZIONE!</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function sendCardAction(card_id) {
+            fetch('/card_action', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({card_id: card_id})
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message));
+        }
+    </script>
+</body>
+</html>

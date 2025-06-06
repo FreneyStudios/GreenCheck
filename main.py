@@ -32,18 +32,18 @@
 
 # [SECTION] - IMPORTS
 try:
-  from flask import render_template, Flask, request, jsonify # Import jsonify for JSON responses
+  from flask import render_template, Flask, request, jsonify 
   import os, sys
-  import spixe as SPIXE # Assuming spixe is installed and available
+  import spixe as SPIXE 
   import multiprocessing
   from transformers import pipeline
   import cmdproc
   import geck_aim as aim
 except Exception as e:
-  print("Error importing modules: ", e) # More specific error message
+  print("Error importing modules: ", e) 
 
 # [SECTION] - VARIABLES
-version     = "v.0.0.5"
+version     = "v.0.0.6"
 __version__ = version
 assert version != None
 
@@ -82,6 +82,23 @@ def home_page():
   aim.geck_aim_init()
 
   return render_template('index.html')
+
+@app.route("/fastsel")
+# @SPIXE.BASE.HANDLE()
+def fastsel():
+  # aim.geck_aim_init()
+
+  return render_template('fastsel.html')
+
+@app.route('/card_action', methods=['POST'])
+def card_action():
+  data = request.json
+  card_id = data.get('card_id')
+
+  # Esegui un'azione in Python
+  print(f"Azione eseguita sulla carta {card_id}")
+
+  return jsonify({'status': 'success', 'message': f'Eseguita azione per carta {card_id}'})
 
 @app.route('/submit', methods=['POST'])
 def submit():

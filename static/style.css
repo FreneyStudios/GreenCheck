@@ -256,3 +256,46 @@ body {
     /* Optional: width property if you want to limit its width and allow wrapping */
     /* width: 300px; */
 }
+
+.container {
+    display: flex;
+    gap: 2rem;
+}
+
+.card {
+    width: 200px;
+    height: 300px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: #333;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 1.5rem;
+}
+
+.card-back {
+    background: #e91e63;
+    transform: rotateY(180deg);
+}

@@ -116,5 +116,5 @@ def process_string(string: str) -> str:
         hypothesis_template=geck_aim_storage.hypothesis_template_advice,
         multi_label=True
     )
-    response = str(response['labels'][0])
+    response = str("Nota che questo comando è soggetto a BuGs, ecco la risposta: " + response['labels'][0])
   return response
